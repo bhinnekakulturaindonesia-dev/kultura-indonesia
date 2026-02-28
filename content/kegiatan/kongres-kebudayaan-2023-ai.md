@@ -2,7 +2,7 @@
 title: "Kongres Kebudayaan Indonesia 2023 – Pemanfaatan AI dalam Penguatan Data Kebudayaan"
 date: "2023-10-23"
 excerpt: "Studi Kultura Indonesia memaparkan pemanfaatan AI dalam digitalisasi Warisan Budaya Takbenda (WBTb) dan pengembangan dashboard analitik budaya Indonesia."
-coverImage: "/assets/kegiatan/kongres-kebudayaan-2023.jpg"
+coverImage: "/assets/kegiatan/Kongres-Kebudayaan-2023.jpg"
 category: "Kongres"
 ---
 
