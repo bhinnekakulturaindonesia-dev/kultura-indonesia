@@ -36,24 +36,17 @@ export default function OnlineParentingPage() {
 
         <div className="space-y-4 text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
           <p>
-            Ini adalah penelitian digital Kultura atas narasi-narasi pengasuhan di media sosial...
+            Ini adalah penelitian digital Kultura atas narasi-narasi pengasuhan di media sosial Pengasuhan keluarga telah menjadi pintu masuk bagi meluasnya praktek-praktek intoleransi dan ekslusivisme di Indonesia paling tidak dalam satu dekade terakhir. Fokus penelitian ini adalah melihat bagaimana narasi-narasi pengasuhan diproduksi, disebarluaskan, dan diterapkan melalui berbagai platform media sosial di Indonesia. Kultura menggunakan machine learning untuk mengumpulkan dan menganalisis berbagai jenis percakapan tentang tema pengasuhan tersebut.
           </p>
 
           <p>
-            Fokus penelitian ini adalah melihat bagaimana narasi diproduksi,
-            disebarluaskan, dan diterapkan melalui berbagai platform media sosial.
+            Penelitian ini berupaya mengidentifikasi narasi-narasi yang eksklusif, diskriminatif, dan mengandung kekerasan. Narasi-narasi semacam ini akan berdampak pada tertutupnya ruang-ruang dialog antar umat beragama dan golongan di Indonesia dan sekaligus berpotensi mematikan aspirasi kelompok-kelompok minoritas di Indonesia. Selain itu narasi-narasi ini memiliki implikasi serius terhadap pola hubungan dalam keluarga, antara lain pelanggengan praktek dominasi laki-laki atas perempuan dan menjadikan anak sebagai obyek indoktrinasi semata.
           </p>
 
           <p>
-            Penelitian ini berupaya mengidentifikasi narasi eksklusif,
-            diskriminatif, dan mengandung kekerasan.
+            Penelitian ini bertujuan membantu pemerintah dan organisasi masyarakat sipil (OMS) untuk mengindentifikasi dan mencegah narasi pengasuhan berbasis agama yang mendukung eksklusivisme dan anti keberagaman. Pemahaman mengenai narasi-narasi pengasuhan anak yang menyebar di media sosial menjadi krusial sebagai landasan bagi pembuatan kebijakan untuk mempromosikan toleransi dalam keluarga di Indonesia.
           </p>
-
-          <p>
-            Studi ini membantu pemerintah dan organisasi masyarakat sipil
-            dalam mencegah narasi pengasuhan berbasis agama yang eksklusif.
-          </p>
-        </div>
+          </div>
 
         <div className="mt-10 flex gap-4 flex-wrap">
           <a
@@ -76,4 +69,5 @@ export default function OnlineParentingPage() {
       </div>
     </section>
   )
+
 }
