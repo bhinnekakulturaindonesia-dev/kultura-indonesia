@@ -10,6 +10,10 @@ const links = [
   { href: '/publikasi', label: 'Publikasi' },
   { href: '/portofolio', label: 'Portofolio' },
   { href: '/kegiatan', label: 'Kegiatan' },
+
+  // 🔥 WBTb external link
+  { href: 'https://wbtb.vercel.app', label: 'WBTb', external: true },
+
   { href: '/tentang-kami', label: 'Tentang Kami' },
 ]
 
@@ -45,19 +49,28 @@ export default function Navbar() {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-4 text-xs uppercase tracking-wider">
-          {links.map(({ href, label }) => {
+          {links.map(({ href, label, external }) => {
             const active =
-              pathname === href ||
-              (href !== '/' && pathname.startsWith(href))
+              !external &&
+              (pathname === href ||
+                (href !== '/' && pathname.startsWith(href)))
 
-            return (
+            return external ? (
+              <a
+                key={href}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3 py-2 rounded hover:bg-white/10 transition"
+              >
+                {label}
+              </a>
+            ) : (
               <Link
                 key={href}
                 href={href}
                 className={`px-3 py-2 rounded transition ${
-                  active
-                    ? 'bg-white/20'
-                    : 'hover:bg-white/10'
+                  active ? 'bg-white/20' : 'hover:bg-white/10'
                 }`}
               >
                 {label}
@@ -86,16 +99,28 @@ export default function Navbar() {
       {/* Mobile Menu */}
       {open && (
         <div className="md:hidden bg-brand-navy border-t border-white/10 px-4 py-4 space-y-3">
-          {links.map(({ href, label }) => (
-            <Link
-              key={href}
-              href={href}
-              onClick={() => setOpen(false)}
-              className="block text-sm uppercase tracking-wider"
-            >
-              {label}
-            </Link>
-          ))}
+          {links.map(({ href, label, external }) =>
+            external ? (
+              <a
+                key={href}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-sm uppercase tracking-wider"
+              >
+                {label}
+              </a>
+            ) : (
+              <Link
+                key={href}
+                href={href}
+                onClick={() => setOpen(false)}
+                className="block text-sm uppercase tracking-wider"
+              >
+                {label}
+              </Link>
+            )
+          )}
 
           <button
             onClick={() => setDark(!dark)}
