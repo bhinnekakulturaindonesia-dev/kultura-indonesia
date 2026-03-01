@@ -10,10 +10,7 @@ const links = [
   { href: '/publikasi', label: 'Publikasi' },
   { href: '/portofolio', label: 'Portofolio' },
   { href: '/kegiatan', label: 'Kegiatan' },
-
-  // 🔥 WBTb external link
-  { href: 'https://wbtb.vercel.app', label: 'WBTb', external: true },
-
+  { href: '/wbtb', label: 'WBTb' }, // ✅ sekarang internal
   { href: '/tentang-kami', label: 'Tentang Kami' },
 ]
 
@@ -47,25 +44,14 @@ export default function Navbar() {
           </span>
         </Link>
 
-        {/* Desktop Nav */}
+        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-4 text-xs uppercase tracking-wider">
-          {links.map(({ href, label, external }) => {
+          {links.map(({ href, label }) => {
             const active =
-              !external &&
-              (pathname === href ||
-                (href !== '/' && pathname.startsWith(href)))
+              pathname === href ||
+              (href !== '/' && pathname.startsWith(href))
 
-            return external ? (
-              <a
-                key={href}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-3 py-2 rounded hover:bg-white/10 transition"
-              >
-                {label}
-              </a>
-            ) : (
+            return (
               <Link
                 key={href}
                 href={href}
@@ -78,7 +64,7 @@ export default function Navbar() {
             )
           })}
 
-          {/* Dark Toggle */}
+          {/* Dark Mode Toggle */}
           <button
             onClick={() => setDark(!dark)}
             className="ml-4 px-3 py-1 border rounded-full text-xs hover:bg-white/10 transition"
@@ -87,9 +73,9 @@ export default function Navbar() {
           </button>
         </nav>
 
-        {/* Mobile Toggle */}
+        {/* Mobile Menu Button */}
         <button
-          className="md:hidden"
+          className="md:hidden text-xl"
           onClick={() => setOpen(!open)}
         >
           ☰
@@ -99,28 +85,16 @@ export default function Navbar() {
       {/* Mobile Menu */}
       {open && (
         <div className="md:hidden bg-brand-navy border-t border-white/10 px-4 py-4 space-y-3">
-          {links.map(({ href, label, external }) =>
-            external ? (
-              <a
-                key={href}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block text-sm uppercase tracking-wider"
-              >
-                {label}
-              </a>
-            ) : (
-              <Link
-                key={href}
-                href={href}
-                onClick={() => setOpen(false)}
-                className="block text-sm uppercase tracking-wider"
-              >
-                {label}
-              </Link>
-            )
-          )}
+          {links.map(({ href, label }) => (
+            <Link
+              key={href}
+              href={href}
+              onClick={() => setOpen(false)}
+              className="block text-sm uppercase tracking-wider"
+            >
+              {label}
+            </Link>
+          ))}
 
           <button
             onClick={() => setDark(!dark)}
