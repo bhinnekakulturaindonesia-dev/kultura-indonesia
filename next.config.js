@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone', // Disable static export, use server-side rendering
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: '**.supabase.co' },
