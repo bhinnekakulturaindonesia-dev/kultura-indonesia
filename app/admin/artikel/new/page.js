@@ -3,6 +3,9 @@
 import ArtikelForm from '@/components/admin/ArtikelForm';
 import AdminLayout from '@/components/admin/AdminLayout';
 
+// Force dynamic rendering for admin pages
+export const dynamic = 'force-dynamic';
+
 export default function NewArtikel() {
   return (
     <AdminLayout>
