@@ -125,7 +125,7 @@ export default function ArtikelList() {
         </div>
 
         <button
-          onClick={() => router.push('/admin/artikel/new')}
+          onClick={() => router.push('/admin/articles/new')}
           className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium"
         >
           + Buat Artikel Baru
@@ -137,7 +137,7 @@ export default function ArtikelList() {
         <div className="text-center py-12 bg-gray-50 rounded-lg">
           <p className="text-gray-500">Belum ada artikel.</p>
           <button
-            onClick={() => router.push('/admin/artikel/new')}
+            onClick={() => router.push('/admin/articles/new')}
             className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
           >
             Buat Artikel Pertama
@@ -193,7 +193,7 @@ export default function ArtikelList() {
                   </td>
                   <td className="px-6 py-4 text-right text-sm font-medium space-x-2">
                     <button
-                      onClick={() => router.push(`/admin/artikel/edit/${item.id}`)}
+                      onClick={() => router.push(`/admin/articles/edit/${item.id}`)}
                       className="text-blue-600 hover:text-blue-900"
                     >
                       Edit

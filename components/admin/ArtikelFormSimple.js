@@ -133,7 +133,7 @@ export default function ArtikelFormSimple({ artikelId = null }) {
         alert('Artikel berhasil dibuat!');
       }
 
-      router.push('/admin/artikel');
+      router.push('/admin/articles');
       router.refresh();
     } catch (error) {
       console.error('Error saving artikel:', error);
@@ -316,7 +316,7 @@ export default function ArtikelFormSimple({ artikelId = null }) {
         </button>
         <button
           type="button"
-          onClick={() => router.push('/admin/artikel')}
+          onClick={() => router.push('/admin/articles')}
           className="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition font-medium"
         >
           Batal
