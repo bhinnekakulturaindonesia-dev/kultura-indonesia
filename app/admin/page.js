@@ -5,6 +5,9 @@ import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import AdminLayout from '@/components/admin/AdminLayout';
 
+// Force dynamic rendering for admin pages
+export const dynamic = 'force-dynamic';
+
 export default function AdminDashboard() {
   const [stats, setStats] = useState({
     totalArtikel: 0,
