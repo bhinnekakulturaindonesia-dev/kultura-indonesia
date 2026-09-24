@@ -1,10 +1,9 @@
-'use client';
-
 import ArtikelForm from '@/components/admin/ArtikelForm';
 import AdminLayout from '@/components/admin/AdminLayout';
 
 // Force dynamic rendering for admin pages
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export default function NewArtikel() {
   return (
