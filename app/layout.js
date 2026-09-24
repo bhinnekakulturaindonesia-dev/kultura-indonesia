@@ -1,4 +1,5 @@
 import './globals.css'
+import 'react-quill/dist/quill.snow.css'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 

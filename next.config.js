@@ -7,5 +7,10 @@ const nextConfig = {
       { protocol: 'https', hostname: 'kulturaindonesia.or.id' },
     ],
   },
+  // Skip static generation for admin pages
+  skipTrailingSlashRedirect: true,
+  experimental: {
+    appDir: true,
+  },
 }
 module.exports = nextConfig
