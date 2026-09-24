@@ -16,6 +16,7 @@ export default function AdminLayout({ children }) {
   const navItems = [
     { name: 'Dashboard', path: '/admin', icon: '🏠' },
     { name: 'Artikel', path: '/admin/articles', icon: '📝' },
+    { name: 'Publikasi', path: '/admin/publications', icon: '📚' },
     { name: 'Portofolio', path: '/admin/portofolio', icon: '🎨' },
     { name: 'Kegiatan', path: '/admin/kegiatan', icon: '📅' },
     { name: 'Media', path: '/admin/media', icon: '🖼️' },
