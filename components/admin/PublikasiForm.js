@@ -14,9 +14,11 @@ export default function PublikasiForm({ publikasiId = null }) {
     penulis: '',
     status: 'draft',
     tanggal: new Date().toISOString().split('T')[0],
+    tags: [],
   });
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [tagInput, setTagInput] = useState('');
   const router = useRouter();
 
   useEffect(() => {
@@ -38,6 +40,7 @@ export default function PublikasiForm({ publikasiId = null }) {
       setFormData({
         ...data,
         tanggal: data.tanggal || new Date().toISOString().split('T')[0],
+        tags: data.tags || [],
       });
     } catch (error) {
       console.error('Error loading publikasi:', error);
@@ -100,6 +103,25 @@ export default function PublikasiForm({ publikasiId = null }) {
     } finally {
       setUploading(false);
     }
+  };
+
+  const handleAddTag = (e) => {
+    e.preventDefault();
+    const tag = tagInput.trim();
+    if (tag && !formData.tags.includes(tag)) {
+      setFormData({
+        ...formData,
+        tags: [...formData.tags, tag]
+      });
+      setTagInput('');
+    }
+  };
+
+  const handleRemoveTag = (tagToRemove) => {
+    setFormData({
+      ...formData,
+      tags: formData.tags.filter(tag => tag !== tagToRemove)
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -260,6 +282,54 @@ export default function PublikasiForm({ publikasiId = null }) {
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
         </div>
+      </div>
+
+      {/* Tags */}
+      <div className="mb-6">
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Tags / Kategori
+        </label>
+        <div className="flex gap-2 mb-3">
+          <input
+            type="text"
+            value={tagInput}
+            onChange={(e) => setTagInput(e.target.value)}
+            onKeyPress={(e) => e.key === 'Enter' && handleAddTag(e)}
+            className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            placeholder="Ketik tag dan tekan Enter atau klik Tambah"
+          />
+          <button
+            type="button"
+            onClick={handleAddTag}
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+          >
+            Tambah
+          </button>
+        </div>
+        
+        {/* Tags Display */}
+        {formData.tags && formData.tags.length > 0 && (
+          <div className="flex flex-wrap gap-2">
+            {formData.tags.map((tag, index) => (
+              <span
+                key={index}
+                className="inline-flex items-center gap-2 px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
+              >
+                {tag}
+                <button
+                  type="button"
+                  onClick={() => handleRemoveTag(tag)}
+                  className="hover:text-red-600"
+                >
+                  ×
+                </button>
+              </span>
+            ))}
+          </div>
+        )}
+        <p className="mt-2 text-sm text-gray-500">
+          Contoh tags: Riset, Toleransi, Media Sosial, Budaya, AI, dll
+        </p>
       </div>
 
       {/* Status */}

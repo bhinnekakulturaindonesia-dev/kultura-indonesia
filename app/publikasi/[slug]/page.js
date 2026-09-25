@@ -84,6 +84,23 @@ export default async function PublikasiDetail({ params }) {
           )}
         </div>
 
+        {/* Tags */}
+        {post.tags && post.tags.length > 0 && (
+          <div className="mb-8">
+            <div className="flex flex-wrap gap-2">
+              {post.tags.map(tag => (
+                <Link
+                  key={tag}
+                  href={`/publikasi?tag=${encodeURIComponent(tag)}`}
+                  className="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full hover:bg-blue-200 transition-colors"
+                >
+                  {tag}
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Cover Image */}
         {post.gambar_url && (
           <div className="rounded-2xl overflow-hidden mb-10 aspect-[4/3] bg-gray-50 flex items-center justify-center">
