@@ -20,6 +20,7 @@ export default function AdminLayout({ children }) {
     { name: 'Portofolio', path: '/admin/portfolio', icon: '🎨' },
     { name: 'Kegiatan', path: '/admin/activities', icon: '📅' },
     { name: 'Media', path: '/admin/media', icon: '🖼️' },
+    { name: 'Analytics', path: '/admin/analytics', icon: '📊' },
   ];
 
   return (

@@ -2,6 +2,8 @@ import { getAllKegiatanFromDB, getKegiatanBySlug } from '../../../lib/kegiatan-d
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
+import PageViewTracker from '@/components/PageViewTracker'
+import ViewCount from '@/components/ViewCount'
 
 export const revalidate = 60; // Revalidate every 60 seconds
 
@@ -21,6 +23,7 @@ export default async function KegiatanDetail({ params }) {
 
   return (
     <article className="max-w-3xl mx-auto px-6 py-16">
+      <PageViewTracker pageType="kegiatan" pageSlug={post.slug} />
 
       {/* Breadcrumb */}
       <nav className="text-sm text-gray-400 mb-8">
@@ -57,6 +60,7 @@ export default async function KegiatanDetail({ params }) {
             {post.kategori}
           </span>
         )}
+        <ViewCount slug={post.slug} type="kegiatan" />
       </div>
 
       {/* Cover Image */}

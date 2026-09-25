@@ -2,6 +2,8 @@ import { getAllPublikasiFromDB, getPublikasiBySlug } from '../../../lib/publikas
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
+import PageViewTracker from '@/components/PageViewTracker'
+import ViewCount from '@/components/ViewCount'
 
 export const revalidate = 60; // Revalidate every 60 seconds
 
@@ -44,6 +46,7 @@ export default async function PublikasiDetail({ params }) {
 
     return (
       <>
+        <PageViewTracker pageType="publikasi" pageSlug={post.slug} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
@@ -82,6 +85,7 @@ export default async function PublikasiDetail({ params }) {
               ✍️ {post.penulis}
             </span>
           )}
+          <ViewCount slug={post.slug} type="publikasi" />
         </div>
 
         {/* Tags */}
