@@ -11,6 +11,18 @@ body {
          transition-colors duration-500;
 }
 
+/* ================= SEARCH INPUT FIX ================= */
+/* Force search input to always have dark text, even in dark mode */
+input[type="text"],
+input[type="search"] {
+  color: #1f2937 !important;
+}
+
+input[type="text"]::placeholder,
+input[type="search"]::placeholder {
+  color: #6b7280 !important;
+}
+
 /* ================= BUTTON ================= */
 
 @layer components {
