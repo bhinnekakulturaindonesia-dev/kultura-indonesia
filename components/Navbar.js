@@ -11,7 +11,7 @@ const links = [
   { href: '/publikasi', label: 'Publikasi' },
   { href: '/portofolio', label: 'Portofolio' },
   { href: '/kegiatan', label: 'Kegiatan' },
-  { href: '/wbtb', label: 'WBTb' }, // ✅ sekarang internal
+  { href: '/wbtb', label: 'Warisan Budaya', badge: 'WBTb' },
   { href: '/tentang-kami', label: 'Tentang Kami' },
 ]
 
@@ -48,7 +48,7 @@ export default function Navbar() {
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-4">
           <nav className="flex items-center gap-4 text-xs uppercase tracking-wider">
-          {links.map(({ href, label }) => {
+          {links.map(({ href, label, badge }) => {
             const active =
               pathname === href ||
               (href !== '/' && pathname.startsWith(href))
@@ -57,11 +57,17 @@ export default function Navbar() {
               <Link
                 key={href}
                 href={href}
-                className={`px-3 py-2 rounded transition ${
+                title={badge ? `${label} (${badge}) — Jelajahi 1.700+ Warisan Budaya Takbenda Indonesia` : undefined}
+                className={`relative px-3 py-2 rounded transition flex items-center gap-1.5 ${
                   active ? 'bg-white/20' : 'hover:bg-white/10'
                 }`}
               >
                 {label}
+                {badge && (
+                  <span className="text-[9px] normal-case tracking-normal px-1.5 py-0.5 rounded-full bg-amber-400 text-brand-navy font-bold">
+                    {badge}
+                  </span>
+                )}
               </Link>
             )
           })}
@@ -98,14 +104,19 @@ export default function Navbar() {
             <SearchBar />
           </div>
 
-          {links.map(({ href, label }) => (
+          {links.map(({ href, label, badge }) => (
             <Link
               key={href}
               href={href}
               onClick={() => setOpen(false)}
-              className="block text-sm uppercase tracking-wider"
+              className="flex items-center gap-2 text-sm uppercase tracking-wider"
             >
               {label}
+              {badge && (
+                <span className="text-[9px] normal-case tracking-normal px-1.5 py-0.5 rounded-full bg-amber-400 text-brand-navy font-bold">
+                  {badge}
+                </span>
+              )}
             </Link>
           ))}
 
