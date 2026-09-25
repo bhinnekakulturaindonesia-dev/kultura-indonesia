@@ -1,11 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 
-export default function SearchPage() {
+function SearchResults() {
   const searchParams = useSearchParams();
   const query = searchParams.get('q') || '';
   
@@ -220,5 +220,21 @@ export default function SearchPage() {
         </>
       )}
     </div>
+  );
+}
+
+// Wrap in Suspense to satisfy Next.js 14 requirement
+export default function SearchPage() {
+  return (
+    <Suspense fallback={
+      <div className="max-w-6xl mx-auto px-4 py-12">
+        <div className="text-center py-12">
+          <div className="inline-block w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-gray-600 mt-4">Memuat...</p>
+        </div>
+      </div>
+    }>
+      <SearchResults />
+    </Suspense>
   );
 }
