@@ -22,6 +22,7 @@ export default function AdminLayout({ children }) {
     { name: 'Media', path: '/admin/media', icon: '🖼️' },
     { name: 'Analytics', path: '/admin/analytics', icon: '📊' },
     { name: 'Newsletter', path: '/admin/newsletter', icon: '📧' },
+    { name: 'Comments', path: '/admin/comments', icon: '💬' },
   ];
 
   return (

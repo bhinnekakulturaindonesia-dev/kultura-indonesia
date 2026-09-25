@@ -4,6 +4,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import PageViewTracker from '@/components/PageViewTracker'
 import ViewCount from '@/components/ViewCount'
+import CommentForm from '@/components/CommentForm'
+import CommentsList from '@/components/CommentsList'
 
 export const revalidate = 60; // Revalidate every 60 seconds
 
@@ -147,6 +149,17 @@ export default async function PublikasiDetail({ params }) {
           >
             ← Kembali ke Publikasi
           </Link>
+        </div>
+
+        {/* Comments Section */}
+        <div className="mt-16 space-y-8">
+          <h2 className="text-2xl font-bold">Diskusi & Komentar</h2>
+          
+          {/* Existing Comments */}
+          <CommentsList contentType="publikasi" contentSlug={post.slug} />
+          
+          {/* Comment Form */}
+          <CommentForm contentType="publikasi" contentSlug={post.slug} />
         </div>
 
       </article>
