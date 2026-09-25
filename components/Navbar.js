@@ -47,11 +47,6 @@ export default function Navbar() {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-4">
-          {/* Search Bar */}
-          <div className="mr-2">
-            <SearchBar />
-          </div>
-
           <nav className="flex items-center gap-4 text-xs uppercase tracking-wider">
           {links.map(({ href, label }) => {
             const active =
@@ -70,15 +65,20 @@ export default function Navbar() {
               </Link>
             )
           })}
+          </nav>
+
+          {/* Search Bar - After Menu */}
+          <div className="ml-2">
+            <SearchBar />
+          </div>
 
           {/* Dark Mode Toggle */}
           <button
             onClick={() => setDark(!dark)}
-            className="ml-4 px-3 py-1 border rounded-full text-xs hover:bg-white/10 transition"
+            className="ml-2 px-3 py-1 border rounded-full text-xs hover:bg-white/10 transition"
           >
             {dark ? 'Light' : 'Dark'}
           </button>
-          </nav>
         </div>
 
         {/* Mobile Menu Button */}
