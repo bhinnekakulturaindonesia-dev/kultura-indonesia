@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
+import SearchBar from './SearchBar'
 
 const links = [
   { href: '/', label: 'Beranda' },
@@ -45,7 +46,13 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-4 text-xs uppercase tracking-wider">
+        <div className="hidden md:flex items-center gap-4">
+          {/* Search Bar */}
+          <div className="mr-2">
+            <SearchBar />
+          </div>
+
+          <nav className="flex items-center gap-4 text-xs uppercase tracking-wider">
           {links.map(({ href, label }) => {
             const active =
               pathname === href ||
@@ -71,7 +78,8 @@ export default function Navbar() {
           >
             {dark ? 'Light' : 'Dark'}
           </button>
-        </nav>
+          </nav>
+        </div>
 
         {/* Mobile Menu Button */}
         <button
@@ -85,6 +93,11 @@ export default function Navbar() {
       {/* Mobile Menu */}
       {open && (
         <div className="md:hidden bg-brand-navy border-t border-white/10 px-4 py-4 space-y-3">
+          {/* Mobile Search */}
+          <div className="mb-4">
+            <SearchBar />
+          </div>
+
           {links.map(({ href, label }) => (
             <Link
               key={href}
