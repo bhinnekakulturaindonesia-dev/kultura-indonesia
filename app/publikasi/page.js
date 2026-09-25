@@ -1,14 +1,15 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { getAllPosts } from '../../lib/publikasi'
+import { getAllPublikasiFromDB } from '../../lib/publikasi-db'
 
 export const metadata = {
   title: 'Publikasi',
 }
 
-export default function PublikasiPage() {
-  const posts = getAllPosts()
-    .sort((a, b) => new Date(b.date) - new Date(a.date))
+export const revalidate = 60; // Revalidate every 60 seconds
+
+export default async function PublikasiPage() {
+  const posts = await getAllPublikasiFromDB()
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
@@ -23,10 +24,10 @@ export default function PublikasiPage() {
             href={`/publikasi/${post.slug}`}
             className="group border rounded-xl overflow-hidden hover:shadow-lg transition"
           >
-            {post.coverImage && (
+            {post.gambar_url && (
               <Image
-                src={post.coverImage}
-                alt={post.title}
+                src={post.gambar_url}
+                alt={post.judul}
                 width={600}
                 height={400}
                 className="w-full h-48 object-cover"
@@ -35,15 +36,19 @@ export default function PublikasiPage() {
 
             <div className="p-5">
               <h2 className="text-lg font-semibold group-hover:text-brand-blue transition">
-                {post.title}
+                {post.judul}
               </h2>
 
               <p className="text-sm text-gray-500 mb-2">
-                {post.date}
+                {new Date(post.tanggal).toLocaleDateString('id-ID', {
+                  day: 'numeric',
+                  month: 'long',
+                  year: 'numeric'
+                })}
               </p>
 
               <p className="text-gray-600 text-sm">
-                {post.excerpt}
+                {post.ringkasan}
               </p>
             </div>
           </Link>

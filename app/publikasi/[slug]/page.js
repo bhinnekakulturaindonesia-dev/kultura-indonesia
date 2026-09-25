@@ -1,18 +1,23 @@
-import { getAllPosts, getPostBySlug } from '../../../lib/publikasi'
+import { getAllPublikasiFromDB, getPublikasiBySlug } from '../../../lib/publikasi-db'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 
+export const revalidate = 60; // Revalidate every 60 seconds
+
 export async function generateStaticParams() {
-  const posts = getAllPosts()
+  const posts = await getAllPublikasiFromDB()
   return posts.map((post) => ({
     slug: post.slug,
   }))
 }
 
 export default async function PublikasiDetail({ params }) {
-  try {
-    const post = await getPostBySlug(params.slug)
+  const post = await getPublikasiBySlug(params.slug)
+
+  if (!post) {
+    return notFound()
+  }
 
     return (
       <article className="max-w-3xl mx-auto px-6 py-16">
@@ -30,22 +35,33 @@ export default async function PublikasiDetail({ params }) {
 
         {/* Title */}
         <h1 className="text-3xl md:text-4xl font-bold mb-4">
-          {post.title}
+          {post.judul}
         </h1>
 
-        {/* Date */}
-        {post.date && (
-          <p className="text-gray-500 mb-8">
-            {post.date}
-          </p>
-        )}
+        {/* Date & Author */}
+        <div className="text-gray-500 mb-8 flex flex-wrap gap-4">
+          {post.tanggal && (
+            <span>
+              📅 {new Date(post.tanggal).toLocaleDateString('id-ID', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+              })}
+            </span>
+          )}
+          {post.penulis && (
+            <span>
+              ✍️ {post.penulis}
+            </span>
+          )}
+        </div>
 
         {/* Cover Image */}
-        {post.coverImage && (
+        {post.gambar_url && (
           <div className="rounded-2xl overflow-hidden mb-10 aspect-[4/3] bg-gray-50 flex items-center justify-center">
             <Image
-              src={post.coverImage}
-              alt={post.title}
+              src={post.gambar_url}
+              alt={post.judul}
               width={1000}
               height={800}
               className="object-contain max-h-full"
@@ -71,7 +87,7 @@ export default async function PublikasiDetail({ params }) {
             transition
             dark:prose-invert
           "
-          dangerouslySetInnerHTML={{ __html: post.content }}
+          dangerouslySetInnerHTML={{ __html: post.contentHtml }}
         />
 
         {/* Back */}
@@ -86,7 +102,4 @@ export default async function PublikasiDetail({ params }) {
 
       </article>
     )
-  } catch {
-    return notFound()
-  }
 }
