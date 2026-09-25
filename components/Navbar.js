@@ -50,8 +50,9 @@ export default function Navbar() {
           <nav className="flex items-center gap-4 text-xs uppercase tracking-wider">
           {links.map(({ href, label, badge }) => {
             const active =
-              pathname === href ||
-              (href !== '/' && pathname.startsWith(href))
+              href === '/'
+                ? pathname === '/'
+                : pathname === href || pathname.startsWith(href + '/')
 
             return (
               <Link
