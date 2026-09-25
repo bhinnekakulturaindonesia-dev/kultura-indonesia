@@ -19,8 +19,36 @@ export default async function PublikasiDetail({ params }) {
     return notFound()
   }
 
+  // Structured Data for Article
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.judul,
+    description: post.ringkasan,
+    image: post.gambar_url,
+    datePublished: post.tanggal,
+    dateModified: post.updated_at || post.created_at,
+    author: {
+      '@type': 'Person',
+      name: post.penulis || 'Studi Kultura Indonesia',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Studi Kultura Indonesia',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://studikulturaindonesia.vercel.app/logo/logo.png',
+      },
+    },
+  };
+
     return (
-      <article className="max-w-3xl mx-auto px-6 py-16">
+      <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        />
+        <article className="max-w-3xl mx-auto px-6 py-16">
 
         {/* Breadcrumb */}
         <nav className="text-sm text-gray-400 mb-8">
@@ -101,5 +129,6 @@ export default async function PublikasiDetail({ params }) {
         </div>
 
       </article>
+      </>
     )
 }

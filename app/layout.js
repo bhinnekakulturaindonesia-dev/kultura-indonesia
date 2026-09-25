@@ -4,68 +4,128 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
 export const metadata = {
-  metadataBase: new URL('http://localhost:3000'),
+  metadataBase: new URL('https://studikulturaindonesia.vercel.app'),
 
   title: {
-    default: 'Kultura Indonesia',
+    default: 'Studi Kultura Indonesia - Riset Budaya, Toleransi & Media Sosial',
     template: '%s | Kultura Indonesia',
   },
 
   description:
-    'Studi budaya, toleransi, dan analisis media sosial Indonesia. Kawan Toleran.',
+    'Studi Kultura Indonesia fokus pada riset budaya, toleransi, analisis media sosial, dan digitalisasi Warisan Budaya Takbenda (WBTb). Kawan Toleran untuk Indonesia yang lebih inklusif.',
 
   keywords: [
     'Kultura Indonesia',
-    'Studi Budaya',
-    'Toleransi',
+    'Studi Budaya Indonesia',
+    'Riset Toleransi',
     'Analisis Media Sosial',
-    'Publikasi Budaya Indonesia',
+    'Publikasi Budaya',
+    'Warisan Budaya Takbenda',
+    'WBTb',
+    'Digital Culture',
+    'Social Media Analysis',
+    'Cultural Studies',
+    'Indonesian Culture',
+    'Tolerance Research',
+    'Data Kebudayaan',
+    'Kawan Toleran',
   ],
 
   authors: [{ name: 'Studi Kultura Indonesia' }],
   creator: 'Studi Kultura Indonesia',
-  publisher: 'Kultura Indonesia',
+  publisher: 'Studi Kultura Indonesia',
 
   openGraph: {
-    title: 'Kultura Indonesia',
+    title: 'Studi Kultura Indonesia - Riset Budaya, Toleransi & Media Sosial',
     description:
-      'Studi budaya, toleransi, dan analisis media sosial Indonesia.',
-    url: '/',
-    siteName: 'Kultura Indonesia',
+      'Studi Kultura Indonesia fokus pada riset budaya, toleransi, analisis media sosial, dan digitalisasi Warisan Budaya Takbenda (WBTb). Kawan Toleran untuk Indonesia yang lebih inklusif.',
+    url: 'https://studikulturaindonesia.vercel.app',
+    siteName: 'Studi Kultura Indonesia',
     locale: 'id_ID',
     type: 'website',
     images: [
       {
         url: '/logo/logo.png',
-        width: 800,
-        height: 800,
-        alt: 'Kultura Indonesia',
+        width: 1200,
+        height: 630,
+        alt: 'Studi Kultura Indonesia',
       },
     ],
   },
 
   twitter: {
     card: 'summary_large_image',
-    title: 'Kultura Indonesia',
+    title: 'Studi Kultura Indonesia',
     description:
-      'Studi budaya, toleransi, dan analisis media sosial Indonesia.',
+      'Riset budaya, toleransi, dan analisis media sosial Indonesia.',
     images: ['/logo/logo.png'],
+    creator: '@kulturaindonesia',
   },
 
   icons: {
-    icon: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
+    icon: [
+      { url: '/favicon/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: '/favicon/apple-touch-icon.png',
+    other: [
+      {
+        rel: 'mask-icon',
+        url: '/favicon/safari-pinned-tab.svg',
+        color: '#1e40af',
+      },
+    ],
   },
+
+  manifest: '/favicon/site.webmanifest',
 
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+
+  verification: {
+    // Add Google Search Console verification when ready
+    // google: 'your-google-verification-code',
+  },
+
+  alternates: {
+    canonical: 'https://studikulturaindonesia.vercel.app',
   },
 }
 
 export default function RootLayout({ children }) {
+  // Structured Data for Organization
+  const organizationSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Studi Kultura Indonesia',
+    url: 'https://studikulturaindonesia.vercel.app',
+    logo: 'https://studikulturaindonesia.vercel.app/logo/logo.png',
+    description: 'Studi Kultura Indonesia fokus pada riset budaya, toleransi, analisis media sosial, dan digitalisasi Warisan Budaya Takbenda (WBTb).',
+    sameAs: [
+      // Add social media links here when available
+      // 'https://twitter.com/kulturaindonesia',
+      // 'https://www.facebook.com/kulturaindonesia',
+      // 'https://www.instagram.com/kulturaindonesia',
+    ],
+  };
+
   return (
     <html lang="id">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+      </head>
       <body className="flex flex-col min-h-screen bg-white">
         <Navbar />
         <main className="flex-1">{children}</main>
