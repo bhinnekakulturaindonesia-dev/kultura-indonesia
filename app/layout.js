@@ -1,7 +1,6 @@
 import './globals.css'
 import 'react-quill/dist/quill.snow.css'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
+import ConditionalLayout from '../components/ConditionalLayout'
 
 export const metadata = {
   metadataBase: new URL('https://studikulturaindonesia.vercel.app'),
@@ -127,9 +126,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="flex flex-col min-h-screen bg-white">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <ConditionalLayout>{children}</ConditionalLayout>
       </body>
     </html>
   )

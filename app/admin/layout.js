@@ -1,5 +1,3 @@
-import '../globals.css';
-
 // Force dynamic rendering for all admin pages
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -17,12 +15,12 @@ export const metadata = {
 };
 
 export default function AdminRootLayout({ children }) {
-  // Admin layout WITHOUT Navbar and Footer
+  // Admin pages get their own AdminLayout (sidebar) rendered per-page.
+  // No <html>/<body> here — those belong only in the root app/layout.js.
+  // No public Navbar/Footer here either — ConditionalLayout hides them for /admin routes.
   return (
-    <html lang="id">
-      <body className="bg-gray-100">
-        {children}
-      </body>
-    </html>
+    <div className="bg-gray-100 min-h-screen">
+      {children}
+    </div>
   );
 }
