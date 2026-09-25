@@ -81,6 +81,7 @@ export default function SearchBar() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Cari publikasi, kegiatan..."
+          style={{ color: '#1f2937' }}
           className="w-full px-4 py-2 pl-10 pr-4 text-sm text-gray-900 placeholder-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         />
         <svg
