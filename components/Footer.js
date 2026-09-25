@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { socials } from '../lib/social'
+import NewsletterForm from './NewsletterForm'
 
 export default function Footer() {
   return (
@@ -14,10 +15,18 @@ export default function Footer() {
             <h3 className="font-alata text-xl font-bold text-gray-900 dark:text-gray-100 mb-3">
               Kultura Indonesia
             </h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+            <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
               Studi budaya, toleransi, dan analisis percakapan publik di Indonesia 
               melalui perspektif kritis dan berbasis data.
             </p>
+
+            {/* Newsletter */}
+            <div>
+              <h4 className="font-alata text-sm tracking-widest uppercase text-gray-500 dark:text-gray-400 mb-3">
+                Newsletter
+              </h4>
+              <NewsletterForm />
+            </div>
           </div>
 
           {/* Navigation */}

@@ -21,6 +21,7 @@ export default function AdminLayout({ children }) {
     { name: 'Kegiatan', path: '/admin/activities', icon: '📅' },
     { name: 'Media', path: '/admin/media', icon: '🖼️' },
     { name: 'Analytics', path: '/admin/analytics', icon: '📊' },
+    { name: 'Newsletter', path: '/admin/newsletter', icon: '📧' },
   ];
 
   return (
