@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 export default function SearchBar() {
   const [query, setQuery] = useState('');
@@ -10,6 +11,14 @@ export default function SearchBar() {
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const searchRef = useRef(null);
+  const pathname = usePathname();
+
+  // Reset search state on route change
+  useEffect(() => {
+    setIsOpen(false);
+    setQuery('');
+    setResults([]);
+  }, [pathname]);
 
   // Close dropdown when clicking outside
   useEffect(() => {
