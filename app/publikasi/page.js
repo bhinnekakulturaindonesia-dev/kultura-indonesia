@@ -6,7 +6,7 @@ export const metadata = {
   title: 'Publikasi',
 }
 
-export const revalidate = 60; // Revalidate every 60 seconds
+export const revalidate = 300; // Cache 5 menit
 
 export default async function PublikasiPage({ searchParams }) {
   const posts = await getAllPublikasiFromDB()
