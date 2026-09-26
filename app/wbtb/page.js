@@ -106,7 +106,7 @@ export default function WBTBPage() {
           </p>
 
           <a
-            href="https://wbtb.vercel.app"
+            href="https://wbtb.kulturaindonesia.or.id"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block bg-brand-blue text-white px-8 py-4 rounded-full hover:bg-brand-dark transition text-sm tracking-wide"
