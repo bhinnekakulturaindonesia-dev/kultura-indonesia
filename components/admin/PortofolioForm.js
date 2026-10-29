@@ -11,12 +11,14 @@ export default function PortofolioForm({ portofolioId = null }) {
     deskripsi: '',
     gambar_url: '',
     file_url: '',
+    file_url_2: '',
     status: 'draft',
     urutan: 0,
   });
   const [loading, setLoading] = useState(false);
   const [uploadingImage, setUploadingImage] = useState(false);
   const [uploadingFile, setUploadingFile] = useState(false);
+  const [uploadingFile2, setUploadingFile2] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -99,7 +101,7 @@ export default function PortofolioForm({ portofolioId = null }) {
     }
   };
 
-  const handleFileUpload = async (e) => {
+  const handleFileUpload = async (e, fileField = 'file_url') => {
     const file = e.target.files[0];
     if (!file) return;
 
@@ -113,8 +115,11 @@ export default function PortofolioForm({ portofolioId = null }) {
       return;
     }
 
+    const isSecond = fileField === 'file_url_2';
+    if (isSecond) setUploadingFile2(true);
+    else setUploadingFile(true);
+
     try {
-      setUploadingFile(true);
       const fileName = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, '-')}`;
       const filePath = `portofolio/${fileName}`;
 
@@ -128,13 +133,14 @@ export default function PortofolioForm({ portofolioId = null }) {
         .from('images')
         .getPublicUrl(filePath);
 
-      setFormData({ ...formData, file_url: publicUrl });
+      setFormData(prev => ({ ...prev, [fileField]: publicUrl }));
       alert('PDF berhasil diupload!');
     } catch (error) {
       console.error('Error uploading file:', error);
       alert('Gagal upload PDF: ' + error.message);
     } finally {
-      setUploadingFile(false);
+      if (isSecond) setUploadingFile2(false);
+      else setUploadingFile(false);
     }
   };
 
@@ -255,30 +261,67 @@ export default function PortofolioForm({ portofolioId = null }) {
 
       {/* File PDF */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          File PDF (Optional)
+        <label className="block text-sm font-medium text-gray-700 mb-4">
+          File PDF
         </label>
-        <div className="flex items-center gap-4">
-          <input
-            type="file"
-            accept="application/pdf"
-            onChange={handleFileUpload}
-            disabled={uploadingFile}
-            className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100"
-          />
-          {uploadingFile && <span className="text-sm text-gray-500">Uploading...</span>}
-        </div>
-        {formData.file_url && (
-          <div className="mt-2">
-            <a 
-              href={formData.file_url} 
-              target="_blank" 
-              className="text-blue-600 hover:text-blue-800 text-sm"
-            >
-              📄 Lihat PDF yang diupload
-            </a>
+
+        {/* PDF Bahasa Indonesia */}
+        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-4">
+          <p className="text-sm font-semibold text-gray-700 mb-2">🇮🇩 Versi Bahasa Indonesia</p>
+          <div className="flex items-center gap-4">
+            <input
+              type="file"
+              accept="application/pdf"
+              onChange={(e) => handleFileUpload(e, 'file_url')}
+              disabled={uploadingFile}
+              className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100"
+            />
+            {uploadingFile && <span className="text-sm text-blue-500">Uploading...</span>}
           </div>
-        )}
+          {formData.file_url && (
+            <div className="mt-2 flex items-center gap-2">
+              <a href={formData.file_url} target="_blank" className="text-blue-600 hover:text-blue-800 text-sm">
+                📄 Lihat PDF Indonesia
+              </a>
+              <button
+                type="button"
+                onClick={() => setFormData(prev => ({ ...prev, file_url: '' }))}
+                className="text-red-500 hover:text-red-700 text-xs"
+              >
+                ✕ Hapus
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* PDF Bahasa Inggris */}
+        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+          <p className="text-sm font-semibold text-gray-700 mb-2">🇬🇧 Versi Bahasa Inggris</p>
+          <div className="flex items-center gap-4">
+            <input
+              type="file"
+              accept="application/pdf"
+              onChange={(e) => handleFileUpload(e, 'file_url_2')}
+              disabled={uploadingFile2}
+              className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+            />
+            {uploadingFile2 && <span className="text-sm text-blue-500">Uploading...</span>}
+          </div>
+          {formData.file_url_2 && (
+            <div className="mt-2 flex items-center gap-2">
+              <a href={formData.file_url_2} target="_blank" className="text-blue-600 hover:text-blue-800 text-sm">
+                📄 Lihat PDF English
+              </a>
+              <button
+                type="button"
+                onClick={() => setFormData(prev => ({ ...prev, file_url_2: '' }))}
+                className="text-red-500 hover:text-red-700 text-xs"
+              >
+                ✕ Hapus
+              </button>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Urutan & Status */}
