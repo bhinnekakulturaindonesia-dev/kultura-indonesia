@@ -84,13 +84,13 @@ export default function ArtikelFormSimple({ artikelId = null }) {
       const filePath = `artikel/${fileName}`;
 
       const { error: uploadError } = await supabase.storage
-        .from('media')
+        .from('images')
         .upload(filePath, file);
 
       if (uploadError) throw uploadError;
 
       const { data: { publicUrl } } = supabase.storage
-        .from('media')
+        .from('images')
         .getPublicUrl(filePath);
 
       setFormData({ ...formData, gambar_url: publicUrl });
